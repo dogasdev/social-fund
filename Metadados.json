@@ -1,0 +1,12 @@
+{
+  "curso": "Ciência da Computação",
+  "disciplina": "Projeto de Programação",
+  "tema_escolhido": "2",
+  "linguagem": "Java",
+  "gerenciador_dependencias": "Nenhuma",
+  "integrantes": [
+    {"nome": "Maria Eduarda Sarmento de Alencar", "dogasdev": "user1"},
+    {"nome": "Davi Lucas", "github_username": "user2"},
+    {"nome":  "Pedro", "github_username": "user3"}
+  ]
+}

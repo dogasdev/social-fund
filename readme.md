@@ -3,7 +3,7 @@
 ## Descrição Geral
 Desenvolva o Núcleo de Domínio (Core Domain) de uma aplicação utilizando as melhores práticas de arquitetura, qualidade e automação, em um grupo de 3 a 5 alunos. O objetivo é resolver um problema real de mercado a partir de um dos 10 temas propostos pelo professor.
 
-**Entrega:** Repositório público no GitHub seguindo o padrão: `poo-pbl-grupo-[nome_do_grupo]`
+**Entrega:** Repositório público no GitHub seguindo o padrão: `Eduarda Alencar, Davi Lucas e Pedro`
 
 ## Requisitos Técnicos Obrigatórios
 
@@ -15,7 +15,6 @@ Desenvolva o Núcleo de Domínio (Core Domain) de uma aplicação utilizando as 
     - `src/domain/`: Entidades, Value Objects, Aggregates
     - `src/application/`: Casos de uso e serviços
     - `src/infrastructure/`: Persistência, adapters
-    - `src/presentation/`: Interface gráfica (apenas se implementar o Plus)
 
 - **Test-Driven Development (TDD):**
   - Histórico de commits deve evidenciar criação de testes antes do código de produção.

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Doador {
     private String nome;
     private Integer id;
-    private BigDecimal dinheiro;
+    private double dinheiro;
 
     public String getNome() {
         return nome;
@@ -23,11 +23,11 @@ public class Doador {
         this.id = id;
     }
 
-    public BigDecimal getDinheiro() {
+    public double getDinheiro() {
         return dinheiro;
     }
 
-    public void setDinheiro(BigDecimal dinheiro) {
+    public void setDinheiro(double dinheiro) {
         this.dinheiro = dinheiro;
     }
 }

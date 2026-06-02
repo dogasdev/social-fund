@@ -19,11 +19,9 @@ public class Doador {
         return nome;
     }
 
-
     public Integer getId() {
         return id;
     }
-
 
     public double getDinheiro() {
         return dinheiro;

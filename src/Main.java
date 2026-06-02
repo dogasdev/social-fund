@@ -97,7 +97,7 @@ public class Main {
         double dinheiro = Double.parseDouble(userInput.nextLine());
 
         Doador doador = new Doador(nome, dinheiro);
-        campanhaService.cadastrarDoador(nomeCampanha, doador);
+        campanhaService.realizarDoacao(nomeCampanha, doador);
         System.out.println(doador);
     }
 

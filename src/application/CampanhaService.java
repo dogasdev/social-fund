@@ -39,19 +39,18 @@ public class CampanhaService {
         }
     }
 
-    public void cadastrarDoador(String nomeCampanha, Doador doador){
+    public void realizarDoacao(String nomeCampanha, Doador doador){
         if(doador == null){
             System.out.println("Doador inválido!");
+            return;
         }
-
         Campanha campanha = campanhaRepo.buscarCampanhaPorNome(nomeCampanha);
 
         if(campanha == null){
             System.out.println("Campanha não encontrada!");
             return;
         }
-
-        campanha.adicionarDoador(doador);
+        campanha.adicionarDoacao(doador);
     }
 }
 

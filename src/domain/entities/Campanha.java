@@ -10,6 +10,7 @@ public class Campanha {
     private Double metaArrecadacao;
     private Date prazo;
     private String status;
+    private Double totalArrecadado = 0.0;
 
     public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
         this.nome = nome;
@@ -53,6 +54,15 @@ public class Campanha {
 
     public void adicionarDoador(Doador doador){
         this.doadores.add(doador);
+    }
+
+    public void adicionarDoacao(Doador doador){
+        this.doadores.add(doador);
+        this.totalArrecadado += doador.getDinheiro();
+    }
+
+    public double getTotalArrecadado(){
+        return totalArrecadado;
     }
 
     public String toString(){

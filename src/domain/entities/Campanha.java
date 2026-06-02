@@ -23,7 +23,6 @@ public class Campanha {
         return nome;
     }
 
-
     public Double getMetaArrecadacao() {
         return metaArrecadacao;
     }

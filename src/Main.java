@@ -23,7 +23,7 @@ public class Main {
         System.out.println("║          FINANCIAMENTO SOCIAL - MENU PRINCIPAL       ║");
         System.out.println("╠══════════════════════════════════════════════════════╣");
         System.out.println("(1) Cadastrar Projeto Social \n(2) Listar projetos \n(3) Buscar Projeto \n(4) Fazer doação \n(5)" +
-                "Listar doações \n(6) Ver recompensas \n(7) Ver metas batidas");
+                " Listar doações \n(6) Ver recompensas \n(7) Ver metas batidas");
         System.out.println("Escolha uma opção: ");
     }
 

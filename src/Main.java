@@ -15,15 +15,15 @@ public class Main {
         do{
             exibirMenu();
             opcao = lerOpcao(userInput);
-            processarOpcao(opcao);
+            processarOpcao(userInput, opcao);
         }while(opcao != 0);
     }
     public static void exibirMenu(){
         System.out.println("╔══════════════════════════════════════════════════════╗");
         System.out.println("║          FINANCIAMENTO SOCIAL - MENU PRINCIPAL       ║");
         System.out.println("╠══════════════════════════════════════════════════════╣");
-        System.out.println("(1) Cadastrar Projeto Social \n(2) Listar projetos \n(3) Buscar Projeto \n(4) Fazer doação \n(5) " +
-                "Listar doações \n(6) Ver recompensas + \n(7) Ver metas batidas");
+        System.out.println("(1) Cadastrar Projeto Social \n(2) Listar projetos \n(3) Buscar Projeto \n(4) Fazer doação \n(5)" +
+                "Listar doações \n(6) Ver recompensas \n(7) Ver metas batidas");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -36,11 +36,11 @@ public class Main {
         }
     }
 
-    public static void processarOpcao(int opcao){
+    public static void processarOpcao(Scanner userInput, int opcao){
         switch (opcao){
             case 1:
-                System.out.println("OLÁ");
-            break;
+                criarCampanha(userInput);
+                break;
         }
     }
 
@@ -64,9 +64,9 @@ public class Main {
             return;
         }
 
-        Boolean status = false;
+        String status = "ATIVA";
 
         Campanha campanha = new Campanha(nome, metaArrecadacao, prazo, status);
-        System.out.println("Projeto Social criado com sucesso!");
+        System.out.println(campanha);
     }
 }

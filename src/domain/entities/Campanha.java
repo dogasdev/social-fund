@@ -6,9 +6,9 @@ public class Campanha {
     private String nome;
     private Double metaArrecadacao;
     private Date prazo;
-    private Boolean status;
+    private String status;
 
-    public Campanha(String nome, Double metaArrecadacao, Date prazo, boolean status){
+    public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
         this.nome = nome;
         this.metaArrecadacao = metaArrecadacao;
         this.prazo = prazo;
@@ -39,11 +39,11 @@ public class Campanha {
         this.prazo = prazo;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -53,7 +53,6 @@ public class Campanha {
     }
 
     public String toString(){
-
-        return String.format("Campanha: %s\n" + "Meta de Arrecadação: R$ %.2f\n" + "Prazo: %s\n" + "Status: %s", getNome(), getMetaArrecadacao(), getPrazoFormatado(), getStatus());
+        return String.format("Campanha: %s\n" + "Meta de Arrecadação: R$ %.2f\n" + "Total arrecadado: R$ %.2f\n" + "Prazo: %s\n" + "Status: %s", getNome(), getMetaArrecadacao(), getPrazoFormatado(), getStatus());
     }
 }

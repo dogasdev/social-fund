@@ -30,5 +30,11 @@ public class CampanhaService {
         }
         return campanhaRepo.buscarCampanhaPorNome(nome);
     }
+
+    public void deletarCampanhaPorNome(String nome){
+        if(campanhas.isEmpty()){
+            System.out.println("Nenhuma campanha registrada");
+        }
+    }
 }
 

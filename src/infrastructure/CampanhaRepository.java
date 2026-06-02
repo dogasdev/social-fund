@@ -21,4 +21,8 @@ public class CampanhaRepository {
         }
         return null;
     }
+
+    public void deletarCampanhaPorNome(String nome){
+        campanhas.removeIf(campanha -> campanha.getNome().equalsIgnoreCase(nome));
+    }
 }

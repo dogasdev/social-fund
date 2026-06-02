@@ -1,5 +1,6 @@
 package infrastructure;
 import domain.entities.Campanha;
+import domain.entities.Doador;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,9 @@ public class CampanhaRepository {
 
     public Campanha buscarCampanhaPorNome(String nome){
         for(Campanha campanha : campanhas){
-            if(campanha.getNome().equalsIgnoreCase(nome));
-            return campanha;
+            if(campanha.getNome().equalsIgnoreCase(nome)){
+                return campanha;
+            }
         }
         return null;
     }

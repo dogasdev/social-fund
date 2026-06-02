@@ -1,12 +1,16 @@
 package domain.entities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Campanha {
+    private List<Doador> doadores = new ArrayList<>();
     private String nome;
     private Double metaArrecadacao;
     private Date prazo;
     private String status;
+    private Double totalArrecadado = 0.0;
 
     public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
         this.nome = nome;
@@ -31,10 +35,6 @@ public class Campanha {
         this.metaArrecadacao = metaArrecadacao;
     }
 
-    public Date getPrazo() {
-        return prazo;
-    }
-
     public void setPrazo(Date prazo) {
         this.prazo = prazo;
     }
@@ -50,6 +50,19 @@ public class Campanha {
     public String getPrazoFormatado(){
         SimpleDateFormat prazoFormatado = new SimpleDateFormat("dd/MM/yyyy");
         return prazoFormatado.format(prazo);
+    }
+
+    public void adicionarDoador(Doador doador){
+        this.doadores.add(doador);
+    }
+
+    public void adicionarDoacao(Doador doador){
+        this.doadores.add(doador);
+        this.totalArrecadado += doador.getDinheiro();
+    }
+
+    public double getTotalArrecadado(){
+        return totalArrecadado;
     }
 
     public String toString(){

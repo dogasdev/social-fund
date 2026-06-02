@@ -23,20 +23,9 @@ public class Campanha {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public Double getMetaArrecadacao() {
         return metaArrecadacao;
-    }
-
-    public void setMetaArrecadacao(Double metaArrecadacao) {
-        this.metaArrecadacao = metaArrecadacao;
-    }
-
-    public void setPrazo(Date prazo) {
-        this.prazo = prazo;
     }
 
     public String getStatus() {
@@ -50,10 +39,6 @@ public class Campanha {
     public String getPrazoFormatado(){
         SimpleDateFormat prazoFormatado = new SimpleDateFormat("dd/MM/yyyy");
         return prazoFormatado.format(prazo);
-    }
-
-    public void adicionarDoador(Doador doador){
-        this.doadores.add(doador);
     }
 
     public void adicionarDoacao(Doador doador, double valorDoacao){

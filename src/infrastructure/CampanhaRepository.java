@@ -20,6 +20,5 @@ public class CampanhaRepository {
             return campanha;
         }
         return null;
-
     }
 }

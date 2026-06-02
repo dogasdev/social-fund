@@ -1,4 +1,8 @@
-import java.util.InputMismatchException;
+import domain.entities.Campanha;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -38,5 +42,31 @@ public class Main {
                 System.out.println("OLÁ");
             break;
         }
+    }
+
+    public static void criarCampanha(Scanner userInput){
+        System.out.println("╔════════════════╗");
+        System.out.println("║  NOVO PROJETO  ║ ");
+        System.out.println("╠════════════════╣");
+        System.out.println("Insira o nome do Projeto: ");
+        String nome = userInput.nextLine();
+        System.out.println("Meta de Arrecadação: ");
+        Double metaArrecadacao = Double.parseDouble(userInput.nextLine());
+        System.out.println("Prazo: ");
+        String prazoTexto = userInput.nextLine();
+
+        Date prazo = null;
+        try{
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            prazo = dataFormatada.parse(prazoTexto);
+        }catch (ParseException e){
+            System.out.println("Data inválida!");
+            return;
+        }
+
+        Boolean status = false;
+
+        Campanha campanha = new Campanha(nome, metaArrecadacao, prazo, status);
+        System.out.println("Projeto Social criado com sucesso!");
     }
 }

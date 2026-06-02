@@ -53,6 +53,6 @@ public class Campanha {
     }
 
     public String toString(){
-        return String.format("Campanha: %s\n" + "Meta de Arrecadação: R$ %.2f\n" + "Total arrecadado: R$ %.2f\n" + "Prazo: %s\n" + "Status: %s", getNome(), getMetaArrecadacao(), getPrazoFormatado(), getStatus());
+        return String.format("Campanha: %s\n" + "Meta de Arrecadação: R$ %.2f\n" + "Prazo: %s\n" + "Status: %s", getNome(), getMetaArrecadacao(), getPrazoFormatado(), getStatus());
     }
 }

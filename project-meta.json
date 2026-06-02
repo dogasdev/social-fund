@@ -5,8 +5,8 @@
   "linguagem": "Java",
   "gerenciador_dependencias": "Nenhuma",
   "integrantes": [
-    {"nome": "Maria Eduarda Sarmento de Alencar", "dogasdev": "user1"},
+    {"nome": "Maria Eduarda Sarmento de Alencar", "github_username": "dogasdev"},
     {"nome": "Davi Lucas", "github_username": "user2"},
-    {"nome":  "Pedro", "github_username": "user3"}
+    {"nome":  "Pedro José Roque do Nascimento", "github_username": "Hinakode"}
   ]
 }

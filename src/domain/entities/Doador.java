@@ -1,9 +1,11 @@
 package domain.entities;
 
+import java.math.BigDecimal;
+
 public class Doador {
     private String nome;
     private Integer id;
-    private Double dinheiro;
+    private BigDecimal dinheiro;
 
     public String getNome() {
         return nome;
@@ -21,11 +23,11 @@ public class Doador {
         this.id = id;
     }
 
-    public Double getDinheiro() {
+    public BigDecimal getDinheiro() {
         return dinheiro;
     }
 
-    public void setDinheiro(Double dinheiro) {
+    public void setDinheiro(BigDecimal dinheiro) {
         this.dinheiro = dinheiro;
     }
 }

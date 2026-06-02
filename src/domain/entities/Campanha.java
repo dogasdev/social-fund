@@ -56,9 +56,9 @@ public class Campanha {
         this.doadores.add(doador);
     }
 
-    public void adicionarDoacao(Doador doador){
-        this.doadores.add(doador);
-        this.totalArrecadado += doador.getDinheiro();
+    public void adicionarDoacao(Doador doador, double valorDoacao){
+        doadores.add(doador);
+        totalArrecadado += valorDoacao;
     }
 
     public double getTotalArrecadado(){

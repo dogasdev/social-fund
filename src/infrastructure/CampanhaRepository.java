@@ -21,6 +21,5 @@ public class CampanhaRepository {
         }
         return null;
 
-        //TESTANDO ESTA MERDA
     }
 }

@@ -11,7 +11,7 @@ public class Main {
         do{
             exibirMenu();
             opcao = lerOpcao(userInput);
-            processarOpcao(userInput, opcao);
+            processarOpcao(opcao);
         }while(opcao != 0);
 
 
@@ -33,7 +33,7 @@ public class Main {
         }
     }
 
-    public static void processarOpcao(Scanner userInput, int opcao){
+    public static void processarOpcao(int opcao){
         switch (opcao){
             case 1:
                 System.out.println("OLÁ");

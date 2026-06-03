@@ -11,6 +11,7 @@ public class Campanha {
     private Date prazo;
     private String status;
     private Double totalArrecadado = 0.0;
+    private List<Doacao> doacoes = new ArrayList<>();
 
     public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
         this.nome = nome;
@@ -23,20 +24,8 @@ public class Campanha {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Double getMetaArrecadacao() {
         return metaArrecadacao;
-    }
-
-    public void setMetaArrecadacao(Double metaArrecadacao) {
-        this.metaArrecadacao = metaArrecadacao;
-    }
-
-    public void setPrazo(Date prazo) {
-        this.prazo = prazo;
     }
 
     public String getStatus() {
@@ -52,13 +41,21 @@ public class Campanha {
         return prazoFormatado.format(prazo);
     }
 
-    public void adicionarDoador(Doador doador){
-        this.doadores.add(doador);
+    public void adicionarDoacao(Doador doador, double valorDoacao){
+        doacoes.add(new Doacao(doador, valorDoacao));
+        totalArrecadado += valorDoacao;
     }
 
-    public void adicionarDoacao(Doador doador){
-        this.doadores.add(doador);
-        this.totalArrecadado += doador.getDinheiro();
+    public double calcularTotalDoadoPor(Doador doador){
+        double total = 0;
+
+        for(Doacao doacao : doacoes){
+            if(doacao.getDoador().equals(doador)){
+                total += doacao.getValor();
+            }
+        }
+
+        return total;
     }
 
     public double getTotalArrecadado(){

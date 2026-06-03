@@ -19,11 +19,9 @@ public class Doador {
         return nome;
     }
 
-
     public Integer getId() {
         return id;
     }
-
 
     public double getDinheiro() {
         return dinheiro;
@@ -33,12 +31,20 @@ public class Doador {
         this.dinheiro = dinheiro;
     }
 
-    public boolean depositar(Double valor){
-        if(valor > 0){
-            dinheiro += valor;
+    public boolean depositar(Double valorDeposito){
+        if(valorDeposito > 0){
+            dinheiro += valorDeposito;
             return true;
         }
         return false;
+    }
+
+    public boolean doar(Double valorDoacao){
+        if(valorDoacao <= 0 || dinheiro < valorDoacao){
+            return false;
+        }
+        dinheiro -= valorDoacao;
+        return true;
     }
 
     public String toString(){

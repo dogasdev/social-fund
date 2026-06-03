@@ -39,7 +39,7 @@ public class CampanhaService {
         }
     }
 
-    public void realizarDoacao(String nomeCampanha, Doador doador){
+    public void realizarDoacao(String nomeCampanha, Doador doador, double valorDoacao){
         if(doador == null){
             System.out.println("Doador inválido!");
             return;
@@ -50,7 +50,11 @@ public class CampanhaService {
             System.out.println("Campanha não encontrada!");
             return;
         }
-        campanha.adicionarDoacao(doador);
+        if(!doador.doar(valorDoacao)){
+            System.out.println("Saldo insuficiente!");
+            return;
+        }
+        campanha.adicionarDoacao(doador, valorDoacao);
     }
 }
 

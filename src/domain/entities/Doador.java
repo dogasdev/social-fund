@@ -9,7 +9,7 @@ public class Doador {
     public Doador(String nome, double dinheiroInicial){
         this.nome = nome;
         this.id = contadorId++;
-        this.dinheiro = dinheiro;
+        this.dinheiro = dinheiroInicial;
     }
 
     public String getNome() {

@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Campanha {
     private List<Doacao> doacoes = new ArrayList<>();
@@ -11,12 +12,15 @@ public class Campanha {
     private Date prazo;
     private String status;
     private Double totalArrecadado = 0.0;
+    private Recompensa recompensa;
+    private Double valorRecompensa;
 
-    public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
+    public Campanha(String nome, Double metaArrecadacao, Date prazo, String status, Double valorRecompensa){
         this.nome = nome;
         this.metaArrecadacao = metaArrecadacao;
         this.prazo = prazo;
         this.status = status;
+        this.valorRecompensa = valorRecompensa;
     }
 
     public String getNome() {
@@ -60,9 +64,29 @@ public class Campanha {
             throw new IllegalStateException("Campanha já atingiu a meta! Não é possível receber mais doações.");
         }
 
-        Doacao doacao = new Doacao(doador, valorDoacao);
-        doacoes.add(doacao);
+        doacoes.add(new Doacao(doador, valorDoacao));
         totalArrecadado += valorDoacao;
+
+        if (atingiuMeta()) {
+            this.status = "ENCERRADA";
+            this.recompensa = sortearGanhador();
+        }
+    }
+
+    private Recompensa sortearGanhador() {
+        List<Doador> doadoresUnicos = new ArrayList<>();
+        for (Doacao d: doacoes) {
+            if (!doadoresUnicos.contains(d.getDoador())) {
+                doadoresUnicos.add(d.getDoador());
+            }
+        }
+        Doador ganhador = doadoresUnicos.get(new Random().nextInt(doadoresUnicos.size()));
+        ganhador.depositar(valorRecompensa);
+        return new Recompensa(ganhador.getNome(), valorRecompensa);
+    }
+
+    public Recompensa getRecompensa() {
+        return recompensa;
     }
 
     public double getProgresso() {

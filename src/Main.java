@@ -80,6 +80,8 @@ public class Main {
         Double metaArrecadacao = Double.parseDouble(userInput.nextLine());
         System.out.println("Prazo: (dd/MM/yyyy)");
         String prazoTexto = userInput.nextLine();
+        System.out.println("Valor da Recompensa do Sorteio: ");
+        Double valorRecompensa = Double.parseDouble(userInput.nextLine());
 
         Date prazo;
 
@@ -93,7 +95,7 @@ public class Main {
 
         String status = "ATIVA";
 
-        Campanha campanha = new Campanha(nome, metaArrecadacao, prazo, status);
+        Campanha campanha = new Campanha(nome, metaArrecadacao, prazo, status, valorRecompensa);
         campanhaService.cadastrarCampanha(campanha);
         System.out.println(campanha);
     }
@@ -119,6 +121,10 @@ public class Main {
 
         campanhaService.realizarDoacao(nomeCampanha, doador, valorDoacao);
         System.out.printf("[!] %s doou %.2f para a campanha %s%n%n", nome, valorDoacao, nomeCampanha);
+
+        if (campanha.getRecompensa() != null) {
+            System.out.println(campanha.getRecompensa().getMensagem());
+        }
 
     }
 

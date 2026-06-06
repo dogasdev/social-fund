@@ -4,6 +4,7 @@ import domain.entities.Campanha;
 import domain.entities.Doador;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class CampanhaService {
     private final CampanhaRepository campanhaRepo;
@@ -56,8 +57,19 @@ public class CampanhaService {
             System.out.println("Valor inválido!");
             return;
         }
-
         campanha.adicionarDoacao(doador, valorDoacao);
+    }
+
+    public void verificarPrazo(Campanha campanha){
+        Date hoje = new Date();
+
+        if(hoje.after(campanha.getPrazo())){
+            if(campanha.getTotalArrecadado() >= campanha.getMetaArrecadacao()){
+                campanha.setStatus("SUCESSO");
+            }
+        }else{
+            campanha.setStatus("CANCELADA");
+        }
     }
 }
 

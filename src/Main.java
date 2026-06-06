@@ -62,7 +62,7 @@ public class Main {
         String nome = userInput.nextLine();
         System.out.println("Meta de Arrecadação: ");
         Double metaArrecadacao = Double.parseDouble(userInput.nextLine());
-        System.out.println("Prazo: (ddMMyyyy)");
+        System.out.println("Prazo: (dd/MM/yyyy)");
         String prazoTexto = userInput.nextLine();
 
         Date prazo;

@@ -31,7 +31,7 @@ public class Doacao {
         if(estornada){
             return "Doação Estornada!";
         }
-        return "Campanha Ativa!";
+        return "REGISTRADA";
     }
 
     public String toString() {

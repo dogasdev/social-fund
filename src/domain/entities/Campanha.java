@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Campanha {
-    private List<Doador> doadores = new ArrayList<>();
     private List<Doacao> doacoes = new ArrayList<>();
     private String nome;
     private Double metaArrecadacao;
@@ -36,9 +35,17 @@ public class Campanha {
         this.status = status;
     }
 
+    public Date getPrazo() {
+        return prazo;
+    }
+
     public String getPrazoFormatado(){
         SimpleDateFormat prazoFormatado = new SimpleDateFormat("dd/MM/yyyy");
         return prazoFormatado.format(prazo);
+    }
+
+    public List<Doacao> getDoacoes(){
+        return doacoes;
     }
 
     public void adicionarDoacao(Doador doador, double valorDoacao){

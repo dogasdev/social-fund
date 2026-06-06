@@ -44,16 +44,19 @@ public class CampanhaService {
             System.out.println("Doador inválido!");
             return;
         }
+
         Campanha campanha = campanhaRepo.buscarCampanhaPorNome(nomeCampanha);
 
         if(campanha == null){
             System.out.println("Campanha não encontrada!");
             return;
         }
-        if(!doador.doar(valorDoacao)){
-            System.out.println("Saldo insuficiente!");
+
+        if(valorDoacao <= 0){
+            System.out.println("Valor inválido!");
             return;
         }
+
         campanha.adicionarDoacao(doador, valorDoacao);
     }
 }

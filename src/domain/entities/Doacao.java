@@ -1,15 +1,14 @@
 package domain.entities;
 
-
 public class Doacao {
     private Doador doador;
     private double valor;
-
+    private boolean estornada;
 
     public Doacao(Doador doador, double valor) {
         this.doador = doador;
         this.valor = valor;
-
+        this.estornada = false;
     }
 
     public Doador getDoador() {
@@ -20,7 +19,22 @@ public class Doacao {
         return valor;
     }
 
-    public String toString(){
-        return String.format("%s | %.2f", getDoador(), getValor());
+    public boolean isEstornada() {
+        return estornada;
+    }
+
+    public void setEstornada(boolean estornada) {
+        this.estornada = estornada;
+    }
+
+    public String getStatus() {
+        if(estornada){
+            return "Doação Estornada!";
+        }
+        return "Campanha Ativa!";
+    }
+
+    public String toString() {
+        return String.format("%s | R$ %.2f | %s", doador.getNome(), getValor(), getStatus());
     }
 }

@@ -17,7 +17,7 @@ public class CampanhaRepository {
 
     public Campanha buscarCampanhaPorNome(String nome){
         for(Campanha campanha : campanhas){
-            if(campanha.getNome().equalsIgnoreCase(nome)){
+            if(campanha.getNome().equalsIgnoreCase(nome.trim())){
                 return campanha;
             }
         }

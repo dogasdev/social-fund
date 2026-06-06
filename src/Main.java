@@ -49,6 +49,8 @@ public class Main {
                 break;
             case 2:
                 fazerDoacao(userInput);
+            case 3:
+                buscarCampanha(userInput);
         }
     }
 
@@ -60,7 +62,7 @@ public class Main {
         String nome = userInput.nextLine();
         System.out.println("Meta de Arrecadação: ");
         Double metaArrecadacao = Double.parseDouble(userInput.nextLine());
-        System.out.println("Prazo: ");
+        System.out.println("Prazo: (ddMMyyyy)");
         String prazoTexto = userInput.nextLine();
 
         Date prazo;
@@ -94,15 +96,27 @@ public class Main {
         System.out.println("Insira seu Nome: ");
         String nome = userInput.nextLine();
 
-        Doador doador = new Doador(nome, 0.0);
-
-        System.out.println("Insira o dinheiro na sua conta: ");
-        double valorDeposito = Double.parseDouble(userInput.nextLine());
-        doador.depositar(valorDeposito);
         System.out.println("Insira o valor da doação: ");
         double valorDoacao = Double.parseDouble(userInput.nextLine());
+
+        Doador doador = new Doador(nome);
+
         campanhaService.realizarDoacao(nomeCampanha, doador, valorDoacao);
-        System.out.printf("[!] %s doou %.2f para a campanha %s\n\n", nome, valorDoacao, nomeCampanha);
+        System.out.printf("[!] %s doou %.2f para a campanha %s%n%n", nome, valorDoacao, nomeCampanha);
+
     }
 
+    public static void buscarCampanha(Scanner userInput){
+        System.out.println("Insira o nome da campanha: ");
+        String nomeCampanha = userInput.nextLine();
+
+        Campanha campanha = campanhaService.buscarCampanhaPorNome(nomeCampanha);
+
+        if(campanha == null){
+            System.out.println("Campanha não encontrada");
+            return;
+        }
+
+        System.out.println(campanha);
+    }
 }

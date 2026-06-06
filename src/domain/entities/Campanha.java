@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Campanha {
     private List<Doador> doadores = new ArrayList<>();
+    private List<Doacao> doacoes = new ArrayList<>();
     private String nome;
     private Double metaArrecadacao;
     private Date prazo;
     private String status;
     private Double totalArrecadado = 0.0;
-    private List<Doacao> doacoes = new ArrayList<>();
 
     public Campanha(String nome, Double metaArrecadacao, Date prazo, String status){
         this.nome = nome;

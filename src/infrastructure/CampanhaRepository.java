@@ -24,6 +24,28 @@ public class CampanhaRepository {
         return null;
     }
 
+    public List<Campanha> buscarCampanhasAtivas() {
+        List<Campanha> campanhasAtivas = new ArrayList<>();
+
+        for (Campanha campanha : campanhas) {
+            if ("ATIVA".equals(campanha.getStatus()) && !campanha.isExpirada()) {
+                campanhasAtivas.add(campanha);
+            }
+        }
+        return campanhasAtivas;
+    }
+
+    public List<Campanha> buscarCampanhasConcluidas() {
+        List<Campanha> campanhasConcluidas = new ArrayList<>();
+
+        for (Campanha campanha : campanhas) {
+            if (campanha.atingiuMeta() || campanha.isExpirada()) {
+                campanhasConcluidas.add(campanha);
+            }
+        }
+        return campanhasConcluidas;
+    }
+
     public void deletarCampanhaPorNome(String nome){
         campanhas.removeIf(campanha -> campanha.getNome().equalsIgnoreCase(nome.trim()));
     }

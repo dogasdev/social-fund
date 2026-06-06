@@ -3,6 +3,7 @@ package domain.entities;
 public class Doacao {
     private Doador doador;
     private double valor;
+    private Campanha campanha;
     private boolean estornada;
 
     public Doacao(Doador doador, double valor) {
@@ -17,6 +18,10 @@ public class Doacao {
 
     public double getValor() {
         return valor;
+    }
+
+    public Campanha getCampanha(){
+        return campanha;
     }
 
     public boolean isEstornada() {

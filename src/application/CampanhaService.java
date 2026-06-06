@@ -13,20 +13,26 @@ public class CampanhaService {
         this.campanhaRepo = campanhaRepo;
     }
 
-    public void cadastrarCampanha(Campanha campanha) {
+    public void cadastrarCampanha(Campanha campanha){
         if (campanha == null) {
             throw new IllegalArgumentException("Campanha não pode ser nula");
         }
         campanhaRepo.salvarCampanha(campanha);
     }
 
-    public List<Campanha> listarCampanhas() {
-        return new ArrayList<>(campanhaRepo.listarCampanhas());
+    public List<Campanha> listarCampanhas(){
+        List<Campanha> campanhas = campanhaRepo.listarCampanhas();
+
+        if (campanhas.isEmpty()){
+            System.out.println("Não há campanhas cadastradas");
+        }
+
+        return new ArrayList<>(campanhas);
     }
 
     public Campanha buscarCampanhaPorNome(String nome){
 
-        if(nome == null || nome.isBlank()) {
+        if(nome == null || nome.isBlank()){
             throw new IllegalArgumentException("Nome inválido.");
         }
         return campanhaRepo.buscarCampanhaPorNome(nome);

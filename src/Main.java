@@ -7,10 +7,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 import infrastructure.CampanhaRepository;
+import infrastructure.DoacoesRepository;
+import infrastructure.DoadorRepository;
+import java.util.List;
 
 public class Main {
-    static CampanhaRepository campanhaRepo = new CampanhaRepository();
-    static CampanhaService campanhaService = new CampanhaService(campanhaRepo);
+    private static CampanhaRepository campanhaRepo = new CampanhaRepository();
+    private static DoacoesRepository doacoesRepo = new DoacoesRepository();
+    private static DoadorRepository doadorRepo = new DoadorRepository();
+    private static CampanhaService campanhaService = new CampanhaService(campanhaRepo);
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
@@ -25,11 +30,11 @@ public class Main {
     }
 
     public static void exibirMenu() {
-        System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║          FINANCIAMENTO SOCIAL - MENU PRINCIPAL       ║");
-        System.out.println("╠══════════════════════════════════════════════════════╣");
-        System.out.println("(1) Cadastrar Projeto Social \n(2) Fazer doação \n(3) Buscar Projeto \n(4) Listar projetos \n" +
-                "(5) Listar doações \n(6) Ver recompensas \n(7) Ver metas batidas");
+        System.out.println("╔═══════════════════════════════════════════════════╗");
+        System.out.println("║          FUNDOS SOCIAIS - MENU PRINCIPAL          ║");
+        System.out.println("╠═══════════════════════════════════════════════════╣");
+        System.out.println("(1) Cadastrar Projeto Social \n(2) Fazer doação \n(3) Buscar Campanha \n(4) Listar campanhas \n" +
+                "(5) Listar doações \n(6) Listar campanhas concluídas");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -49,8 +54,19 @@ public class Main {
                 break;
             case 2:
                 fazerDoacao(userInput);
+                break;
             case 3:
                 buscarCampanha(userInput);
+                break;
+            case 4:
+                listarCampanhas();
+                break;
+            case 5:
+                listarDoacoes(userInput);
+                break;
+            case 6:
+                listarCampanhasConcluidas();
+                break;
         }
     }
 
@@ -99,7 +115,7 @@ public class Main {
         System.out.println("Insira o valor da doação: ");
         double valorDoacao = Double.parseDouble(userInput.nextLine());
 
-        Doador doador = new Doador(nome);
+        Doador doador = new Doador(nome, valorDoacao);
 
         campanhaService.realizarDoacao(nomeCampanha, doador, valorDoacao);
         System.out.printf("[!] %s doou %.2f para a campanha %s%n%n", nome, valorDoacao, nomeCampanha);
@@ -118,5 +134,44 @@ public class Main {
         }
 
         System.out.println(campanha);
+    }
+
+    public static void listarCampanhas(){
+        List<Campanha> campanhas = campanhaService.listarCampanhas();
+
+        if(campanhas.isEmpty()){
+            System.out.println("Nenhuma campanha cadastrada");
+            return;
+        }
+
+        System.out.println("╔════════════════════╗");
+        System.out.println("║ LISTA DE CAMPANHAS ║");
+        System.out.println("╠════════════════════╠");
+        System.out.println();
+
+        for (Campanha camp : campanhas) {
+            System.out.printf("Nome: %s\n| Meta: R$%.2f\n| Prazo: %s\n| Status: %s\n\n", camp.getNome(), camp.getMetaArrecadacao(), camp.getPrazoFormatado(), camp.getStatus());
+        }
+    }
+
+    public static void listarDoacoes(Scanner userInput){
+        System.out.println("Insira o nome da campanha: ");
+        String nome = userInput.nextLine();
+
+        Campanha campanha = campanhaService.buscarCampanhaPorNome(nome);
+
+        if(campanha == null){
+            System.out.println("Campanha não encontrada!");
+        }
+
+        System.out.println(doacoesRepo.listarDoacoes());
+    }
+
+    public static void listarCampanhasConcluidas(){
+        List<Campanha> campanhasConcluidas = campanhaRepo.buscarCampanhasConcluidas();
+
+        for(Campanha campanha : campanhasConcluidas){
+            System.out.println(campanha);
+        }
     }
 }

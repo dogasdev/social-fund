@@ -44,13 +44,36 @@ public class Campanha {
         return prazoFormatado.format(prazo);
     }
 
-    public List<Doacao> getDoacoes(){
-        return doacoes;
+    public boolean atingiuMeta() {
+        return totalArrecadado >= metaArrecadacao;
     }
 
-    public void adicionarDoacao(Doador doador, double valorDoacao){
-        doacoes.add(new Doacao(doador, valorDoacao));
+    public boolean isExpirada() {
+        return new Date().after(prazo);
+    }
+
+    public void adicionarDoacao(Doador doador, double valorDoacao) {
+        if (isExpirada()) {
+            throw new IllegalStateException("Campanha expirada! Não é possível receber doações.");
+        }
+        if (atingiuMeta()) {
+            throw new IllegalStateException("Campanha já atingiu a meta! Não é possível receber mais doações.");
+        }
+
+        Doacao doacao = new Doacao(doador, valorDoacao);
+        doacoes.add(doacao);
         totalArrecadado += valorDoacao;
+    }
+
+    public double getProgresso() {
+        if (metaArrecadacao == null || metaArrecadacao <= 0) {
+            return 0;
+        }
+        return (totalArrecadado / metaArrecadacao) * 100;
+    }
+
+    public List<Doacao> getDoacoes(){
+        return doacoes;
     }
 
     public double calcularTotalDoadoPor(Doador doador){
@@ -61,7 +84,6 @@ public class Campanha {
                 total += doacao.getValor();
             }
         }
-
         return total;
     }
 
@@ -70,6 +92,6 @@ public class Campanha {
     }
 
     public String toString(){
-        return String.format("Campanha: %s\n" + "Meta de Arrecadação: R$ %.2f\n" + "Prazo: %s\n" + "Status: %s", getNome(), getMetaArrecadacao(), getPrazoFormatado(), getStatus());
+        return String.format("Campanha: %s\nMeta de Arrecadação: R$ %.2f\nTotal arrecadado: %.2f\n" + "Prazo: %s\n" + "Status: %s\n\n", getNome(), getMetaArrecadacao(), getTotalArrecadado(), getPrazoFormatado(), getStatus());
     }
 }

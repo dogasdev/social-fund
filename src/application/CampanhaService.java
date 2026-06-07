@@ -1,4 +1,5 @@
 package application;
+import domain.entities.Doacao;
 import infrastructure.CampanhaRepository;
 import domain.entities.Campanha;
 import domain.entities.Doador;
@@ -64,6 +65,17 @@ public class CampanhaService {
             return;
         }
         campanha.adicionarDoacao(doador, valorDoacao);
+        System.out.println("Doações registradas: " + campanha.getDoacoes().size());
+    }
+
+    public List<Doacao> listarDoacoesCampanha(String nomeCampanha){
+        Campanha campanha = campanhaRepo.buscarCampanhaPorNome(nomeCampanha);
+
+        if(campanha == null){
+            throw new IllegalArgumentException("Campanha não encontrada!");
+        }
+
+        return campanha.getDoacoes();
     }
 
     public void verificarPrazo(Campanha campanha){

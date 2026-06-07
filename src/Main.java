@@ -10,6 +10,7 @@ import infrastructure.CampanhaRepository;
 import infrastructure.DoacoesRepository;
 import infrastructure.DoadorRepository;
 import java.util.List;
+import domain.entities.Doacao;
 
 public class Main {
     private static CampanhaRepository campanhaRepo = new CampanhaRepository();
@@ -62,7 +63,7 @@ public class Main {
                 listarCampanhas();
                 break;
             case 5:
-                listarDoacoes(userInput);
+                listarDoacoesCampanha(userInput, campanhaService);
                 break;
             case 6:
                 listarCampanhasConcluidas();
@@ -71,10 +72,10 @@ public class Main {
     }
 
     public static void criarCampanha(Scanner userInput) {
-        System.out.println("╔════════════════╗");
-        System.out.println("║  NOVO PROJETO  ║ ");
-        System.out.println("╠════════════════╣");
-        System.out.println("Insira o nome do Projeto: ");
+        System.out.println("╔═══════════════╗");
+        System.out.println("║ NOVA CAMPANHA ║ ");
+        System.out.println("╠═══════════════╣");
+        System.out.println("Insira o nome da campanha: ");
         String nome = userInput.nextLine();
         System.out.println("Meta de Arrecadação: ");
         Double metaArrecadacao = Double.parseDouble(userInput.nextLine());
@@ -160,24 +161,34 @@ public class Main {
         }
     }
 
-    public static void listarDoacoes(Scanner userInput){
-        System.out.println("Insira o nome da campanha: ");
-        String nome = userInput.nextLine();
-
-        Campanha campanha = campanhaService.buscarCampanhaPorNome(nome);
-
-        if(campanha == null){
-            System.out.println("Campanha não encontrada!");
-        }
-
-        System.out.println(doacoesRepo.listarDoacoes());
-    }
-
     public static void listarCampanhasConcluidas(){
         List<Campanha> campanhasConcluidas = campanhaRepo.buscarCampanhasConcluidas();
 
         for(Campanha campanha : campanhasConcluidas){
             System.out.println(campanha);
+        }
+    }
+
+    public static void listarDoacoesCampanha(Scanner userInput, CampanhaService campanhaService){
+        System.out.println("Insira o nome da campanha: ");
+        String nomeCampanha = userInput.nextLine();
+
+        try{
+            List<Doacao> doacoes = campanhaService.listarDoacoesCampanha(nomeCampanha);
+
+            if(doacoes.isEmpty()){
+                System.out.printf("Nenhuma doação em %s registrada!", nomeCampanha);
+                return;
+            }
+            System.out.println("╔═══════════════════════════════╗");
+            System.out.println("║      DOAÇÕES DA CAMPANHA      ║");
+            System.out.println("╠═══════════════════════════════╣");
+
+            for(Doacao doacao : doacoes){
+                System.out.println(doacao);
+            }
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
         }
     }
 }

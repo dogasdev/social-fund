@@ -238,7 +238,7 @@ public class Main {
 
             Campanha campanhaSelecionada = campanhasAtivas.get(escolha - 1);
 
-            // Confirmação antes de cancelar
+
             System.out.printf("\n⚠️  ATENÇÃO! Você está prestes a cancelar a campanha: %s\n", campanhaSelecionada.getNome());
             System.out.printf("Total arrecadado até agora: R$%.2f\n", campanhaSelecionada.getTotalArrecadado());
             System.out.println("Isso irá estornar o valor total doado para cada doador.");

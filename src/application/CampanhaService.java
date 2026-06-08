@@ -104,7 +104,7 @@ public class CampanhaService {
             throw new IllegalStateException("Campanha expirada não pode ser cancelada!");
         }
 
-        // Estorna todas as doações
+
         List<Doacao> doacoes = campanha.getDoacoes();
         double totalEstornado = 0.0;
 
@@ -112,7 +112,7 @@ public class CampanhaService {
             if (!doacao.isEstornada()) {
                 Doador doador = doacao.getDoador();
                 double valor = doacao.getValor();
-                doador.depositar(valor); // Devolve o dinheiro para o doador
+                doador.depositar(valor);
                 doacao.setEstornada(true);
                 totalEstornado += valor;
             }

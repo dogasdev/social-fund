@@ -34,8 +34,8 @@ public class Main {
         System.out.println("╔═══════════════════════════════════════════════════╗");
         System.out.println("║          FUNDOS SOCIAIS - MENU PRINCIPAL          ║");
         System.out.println("╠═══════════════════════════════════════════════════╣");
-        System.out.println("(1) Cadastrar Projeto Social \n(2) Fazer doação \n(3) Buscar Campanha \n(4) Listar campanhas \n" +
-                "(5) Listar doações \n(6) Listar campanhas concluídas");
+        System.out.println("(1) Cadastrar Projeto Social\n(2) Fazer doação \n(3) Buscar Campanha \n(4) Listar campanhas \n" +
+                "(5) Listar doações \n(6) Listar campanhas concluídas\n(7) Cancelar campanha ativa\n");
         System.out.println("Escolha uma opção: ");
     }
 
@@ -68,6 +68,14 @@ public class Main {
             case 6:
                 listarCampanhasConcluidas();
                 break;
+            case 7:
+                cancelarCampanha(userInput);
+                break;
+            case 0:
+                System.out.println("Encerrando o programa...");
+                break;
+            default:
+                System.out.println("Opção inválida!");
         }
     }
 
@@ -189,6 +197,65 @@ public class Main {
             }
         }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void cancelarCampanha(Scanner userInput) {
+        System.out.println("╔═══════════════════════════════════╗");
+        System.out.println("║       CANCELAR CAMPANHA           ║");
+        System.out.println("╠═══════════════════════════════════╣");
+
+
+        List<Campanha> campanhasAtivas = campanhaRepo.buscarCampanhasAtivas();
+
+        if (campanhasAtivas.isEmpty()) {
+            System.out.println("Não há campanhas ativas para cancelar!");
+            return;
+        }
+
+        System.out.println("Campanhas ativas disponíveis:");
+        for (int i = 0; i < campanhasAtivas.size(); i++) {
+            Campanha camp = campanhasAtivas.get(i);
+            System.out.printf("%d. %s (Meta: R$%.2f | Arrecadado: R$%.2f | Prazo: %s)%n",
+                    i + 1, camp.getNome(), camp.getMetaArrecadacao(),
+                    camp.getTotalArrecadado(), camp.getPrazoFormatado());
+        }
+
+        System.out.println("\nEscolha o número da campanha para cancelar (0 para voltar): ");
+        int escolha;
+
+        try {
+            escolha = Integer.parseInt(userInput.nextLine());
+
+            if (escolha == 0) {
+                return;
+            }
+
+            if (escolha < 1 || escolha > campanhasAtivas.size()) {
+                System.out.println("Opção inválida!");
+                return;
+            }
+
+            Campanha campanhaSelecionada = campanhasAtivas.get(escolha - 1);
+
+            // Confirmação antes de cancelar
+            System.out.printf("\n⚠️  ATENÇÃO! Você está prestes a cancelar a campanha: %s\n", campanhaSelecionada.getNome());
+            System.out.printf("Total arrecadado até agora: R$%.2f\n", campanhaSelecionada.getTotalArrecadado());
+            System.out.println("Isso irá estornar o valor total doado para cada doador.");
+            System.out.print("Digite 'SIM' para confirmar o cancelamento: ");
+
+            String confirmacao = userInput.nextLine();
+
+            if ("SIM".equalsIgnoreCase(confirmacao)) {
+                campanhaService.cancelarCampanha(campanhaSelecionada.getNome());
+            } else {
+                System.out.println("Cancelamento não confirmado. Operação abortada.");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada inválida!");
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 }

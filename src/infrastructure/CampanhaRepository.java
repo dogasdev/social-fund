@@ -49,4 +49,6 @@ public class CampanhaRepository {
     public void deletarCampanhaPorNome(String nome){
         campanhas.removeIf(campanha -> campanha.getNome().equalsIgnoreCase(nome.trim()));
     }
+
+
 }

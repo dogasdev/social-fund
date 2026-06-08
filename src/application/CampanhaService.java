@@ -89,5 +89,38 @@ public class CampanhaService {
             campanha.setStatus("CANCELADA");
         }
     }
+    public void cancelarCampanha(String nomeCampanha) {
+        Campanha campanha = campanhaRepo.buscarCampanhaPorNome(nomeCampanha);
+
+        if (campanha == null) {
+            throw new IllegalArgumentException("Campanha não encontrada!");
+        }
+
+        if (!"ATIVA".equals(campanha.getStatus())) {
+            throw new IllegalStateException("Apenas campanhas ativas podem ser canceladas!");
+        }
+
+        if (campanha.isExpirada()) {
+            throw new IllegalStateException("Campanha expirada não pode ser cancelada!");
+        }
+
+        // Estorna todas as doações
+        List<Doacao> doacoes = campanha.getDoacoes();
+        double totalEstornado = 0.0;
+
+        for (Doacao doacao : doacoes) {
+            if (!doacao.isEstornada()) {
+                Doador doador = doacao.getDoador();
+                double valor = doacao.getValor();
+                doador.depositar(valor); // Devolve o dinheiro para o doador
+                doacao.setEstornada(true);
+                totalEstornado += valor;
+            }
+        }
+
+        campanha.setStatus("CANCELADA");
+        System.out.printf("Campanha '%s' cancelada! Total estornado: R$ %.2f para %d doador(es)%n",
+                nomeCampanha, totalEstornado, doacoes.size());
+    }
 }
 

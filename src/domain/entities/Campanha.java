@@ -118,4 +118,8 @@ public class Campanha {
     public String toString(){
         return String.format("Campanha: %s\nMeta de Arrecadação: R$ %.2f\nTotal arrecadado: %.2f\n" + "Prazo: %s\n" + "Status: %s\n\n", getNome(), getMetaArrecadacao(), getTotalArrecadado(), getPrazoFormatado(), getStatus());
     }
+
+    public boolean isAtiva() {
+        return "ATIVA".equals(this.status) && !isExpirada();
+    }
 }

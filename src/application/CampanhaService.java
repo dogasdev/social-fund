@@ -16,7 +16,7 @@ public class CampanhaService {
 
     public void cadastrarCampanha(Campanha campanha){
         if (campanha == null) {
-            throw new IllegalArgumentException("Campanha não pode ser nula");
+            throw new IllegalStateException("Campanha não pode ser nula");
         }
         campanhaRepo.salvarCampanha(campanha);
     }
@@ -34,7 +34,7 @@ public class CampanhaService {
     public Campanha buscarCampanhaPorNome(String nome){
 
         if(nome == null || nome.isBlank()){
-            throw new IllegalArgumentException("Nome inválido.");
+            throw new IllegalStateException("Nome inválido.");
         }
         return campanhaRepo.buscarCampanhaPorNome(nome);
     }
@@ -62,6 +62,10 @@ public class CampanhaService {
 
         if(valorDoacao <= 0){
             System.out.println("Valor inválido!");
+            return;
+        }
+        if (!doador.doar(valorDoacao)) {
+            System.out.println("Saldo insuficiente!");
             return;
         }
         campanha.adicionarDoacao(doador, valorDoacao);

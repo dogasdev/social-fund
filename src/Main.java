@@ -126,7 +126,7 @@ public class Main {
         System.out.println("Insira o valor da doação: ");
         double valorDoacao = Double.parseDouble(userInput.nextLine());
 
-        Doador doador = new Doador(nome, valorDoacao);
+        Doador doador = new Doador(nome, 500);
 
         campanhaService.realizarDoacao(nomeCampanha, doador, valorDoacao);
         System.out.printf("[!] %s doou %.2f para a campanha %s%n%n", nome, valorDoacao, nomeCampanha);
